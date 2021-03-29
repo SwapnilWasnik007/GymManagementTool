@@ -1,0 +1,72 @@
+﻿@using GymManagement.Web.Models
+
+@{
+    ViewData["Title"] = "FeeUpdate";
+    List<MembershipPackageViewModel> membershipPackages = ViewData["Membershippackages"] as List<MembershipPackageViewModel>;
+}
+
+<div class="card m-auto defaultCardWidth">
+    <div class="card-header">
+        <h5>Fees Management</h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="txtRegNumber">Registration Number: </label>
+                    <input type="number" class="form-control" onkeydown="ResetMobileNumb()" id="txtRegNumber" placeholder="Enter registration number">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="txtMobile">Mobile Number: </label>
+                    <input type="number" class="form-control" onkeyup="ResetRegNumb()" id="txtMobile" placeholder="Enter mobile number">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="txtName">Name: </label>
+                    <input type="text" class="form-control" id="txtName" disabled>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="txtEndDate">End Date: </label>
+                    <input type="datetime-local" class="form-control" id="txtEndDate" disabled>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="txtPackage">Current Package: </label>
+                    <input type="text" class="form-control" id="txtPackage" disabled>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="txtTotal">Total Amount: </label>
+                    <input type="number" class="form-control" id="txtTotal" placeholder="0.00" disabled>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="txtPaidAmt">Paid Amount: </label>
+                    <input type="number" class="form-control" id="txtPaidAmt" onkey placeholder="0" disabled>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="txtBalAmt">Balance Amount: </label>
+                    <input type="number" class="form-control" placeholder="0.00" id="txtBalAmt" disabled>
+                    <input type="hidden" class="form-control" id="txtOrigBal" disabled>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <button type="button" id="btnUpdateFee" name="btnUpdateFee" class="btn btn-primary float-right submitButton ml-3" disabled>Submit</button>
+        <button type="button" id="btnGetUserDetail" name="btnGetUserDetail" class="btn btn-primary float-right submitButton ml-3">Get User</button>
+        <button type="button" id="btnReset" name="btnReset" onclick="ResetAll()" class="btn btn-primary float-right submitButton" disabled>Reset</button>
+    </div>
+</div>

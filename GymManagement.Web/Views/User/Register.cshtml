@@ -1,0 +1,108 @@
+﻿@using GymManagement.Web.Models
+
+
+@{
+    ViewData["Title"] = "Register";
+    List<MembershipPackageViewModel> membershipPackages = ViewData["Membershippackages"] as List<MembershipPackageViewModel>;
+}
+
+<body onload="OnloadFunct()">
+
+    <div class="card m-auto defaultCardWidth">
+        <div class="card-header">
+            <h5>New User Registration</h5>
+        </div>
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="txtName">Name <span style="color: red">*</span>: </label>
+                        <input type="text" class="form-control" onclick="HideError()" id="txtName" placeholder="Enter full name">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="txtMobile1">Mobile <span style="color: red">*</span>: </label>
+                        <input type="number" class="form-control" onclick="HideError()" id="txtMobile1" placeholder="Enter mobile number">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" value="Morning" id="txtBatch">
+                        <label for="drpBatch">Batch <span style="color: red">*</span>: </label>
+                        <select name="drpBatch" onchange="UpdateBatch(this.value)" onclick="HideError()" id="drpBatch" class="form-control">
+                            <option value="Morning">Morning</option>
+                            <option value="Evening">Evening</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="txtAddress">Address <span style="color: red">*</span>: </label>
+                        <input type="text" class="form-control" onclick="HideError()" id="txtAddress" placeholder="Enter address">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="drpPackage">Package <span style="color: red">*</span>: </label>
+                        <input id="txtPackageValue" type="hidden" value="" />
+                        <select name="drpPackage" onchange="UpdateTotalAmount(this.value)" onclick="HideError()" id="drpPackage" class="form-control">
+                            <option value="-1">--Select--</option>
+                            @foreach (var package in membershipPackages)
+                            {
+                                <option value="@package.Amount">@package.Package</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="txtStartDate">Start Date <span style="color: red">*</span>: </label>
+                        <input type="date" placeholder="dd-mm-yyyy" disabled onchange="UpdateEndDateOnStartDate(this.value)" class="form-control" id="txtStartDate">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="txtEndDate">End Date: </label>
+                        <input type="date" class="form-control" id="txtEndDate" disabled>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="txtTotal">Total Amount: </label>
+                        <input type="number" class="form-control" id="txtTotal" placeholder="0.00" disabled>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="txtPaidAmt">Paid Amount <span style="color: red">*</span>: </label>
+                        <input type="number" class="form-control" id="txtPaidAmt" onchange="convertDecimal(this.value)" placeholder="0.00">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="txtBalAmt">Balance Amount: </label>
+                        <input type="number" class="form-control" placeholder="0.00" id="txtBalAmt" disabled>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="divErrorResult" class="row" hidden>
+            <div class="col-md-12">
+                <div class="alert alert-warning" role="alert">
+                    <label id="lblErrorMsg">Test</label>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button type="submit" id="btnRegisterUser" name="btnRegisterUser" class="btn btn-primary float-right submitButton">Submit</button>
+        </div>
+    </div>
+</body>
